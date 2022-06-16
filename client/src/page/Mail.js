@@ -1,11 +1,28 @@
+import { useEffect } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 export const Mail = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { timeStamp, subject, content } = location.state;
+  const { timeStamp, subject, content, id, isRead } = location.state;
+
+  useEffect(() => {
+    onOpenMail(id);
+  });
+
+  const onOpenMail = async (id) => {
+    if (!isRead) {
+      try {
+        await axios.patch(`http://localhost:5500/api/message/${id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div className="relative bg-white ml-5 m-5 px-5 pt-3 pb-8 space-y-3">
       <IoReturnUpBack

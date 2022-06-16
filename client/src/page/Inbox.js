@@ -17,8 +17,6 @@ export const Inbox = () => {
     } catch (error) {}
   };
 
-  console.log(messages);
-
   return (
     <div className="space-y-2 mx-5 overflow-y-auto">
       {!messages
@@ -31,6 +29,8 @@ export const Inbox = () => {
                 timeStamp: message.timeStamp,
                 subject: message.subject,
                 content: message.content,
+                id: message._id,
+                isRead: message.isRead,
               }}
             >
               <Cards {...message} />
