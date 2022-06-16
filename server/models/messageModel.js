@@ -10,6 +10,7 @@ const messageSchema = mongoose.Schema({
     lowercase: true,
   },
   isRead: {
+    type: Boolean,
     default: false,
   },
   subject: {

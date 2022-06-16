@@ -9,13 +9,16 @@ import { CgShapeCircle } from "react-icons/cg";
 import { RiEdit2Line } from "react-icons/ri";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 function App() {
   const [userName] = useState("Tansi Jones");
   const [noMessages] = useState(10);
   const [noUnReadMessages] = useState(7);
   let [isOpen, setIsOpen] = useState(false);
-  const [setMessage] = useState("");
+  const [content, setContent] = useState("");
+  const [subject, setSubject] = useState("");
 
   const closeModal = () => {
     setIsOpen(false);
@@ -25,10 +28,24 @@ function App() {
     return setIsOpen(true);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await axios.post("http://localhost:5500/api/message", {
+        content,
+        subject,
+      });
+      toast(data.response);
+      closeModal();
+    } catch (error) {
+      toast(error.response);
+    }
+  };
 
   return (
     <>
+      <Toaster />
       <div className="body-grid">
         <section>
           <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white">
@@ -133,23 +150,31 @@ function App() {
                     >
                       <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-5 text-left align-middle shadow transition-all">
                         <form onSubmit={handleSubmit}>
-                          <div>
-                            <textarea
-                              rows="3"
-                              cols="40"
-                              placeholder="New Message"
-                              className="resize-none w-full p-2 rounded-md outline-none text-slate-500 border"
-                              onChange={(event) =>
-                                setMessage(event.target.value)
-                              }
-                            ></textarea>
+                          <div className="border rounded-md">
+                            <div>
+                              <input
+                                type="text"
+                                placeholder="Subject"
+                                className="p-2 outline-none border-b w-full text-slate-500"
+                                onChange={(event) =>
+                                  setSubject(event.target.value)
+                                }
+                              />
+                            </div>
+                            <div>
+                              <textarea
+                                rows="3"
+                                cols="40"
+                                placeholder="New Message"
+                                className="resize-none w-full p-2  outline-none text-slate-500"
+                                onChange={(event) =>
+                                  setContent(event.target.value)
+                                }
+                              ></textarea>
+                            </div>
                           </div>
                           <div className="mt-4">
-                            <button
-                              type="button"
-                              className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90"
-                              onClick={closeModal}
-                            >
+                            <button className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90">
                               Send message
                             </button>
                           </div>

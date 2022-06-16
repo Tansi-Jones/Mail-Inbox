@@ -15,9 +15,13 @@ export const sendMessages = async (req, res) => {
       ...req.body,
       timeStamp: new Date().toISOString(),
     });
-    res.status(200).json({ status: "success", message });
+    res
+      .status(200)
+      .json({ status: "success", message, response: "Message Sent" });
   } catch (error) {
-    res.status(404).json({ status: "failed", error });
+    res
+      .status(404)
+      .json({ status: "failed", error, response: "Failed to send" });
   }
 };
 
