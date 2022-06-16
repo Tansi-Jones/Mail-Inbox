@@ -2,3 +2,25 @@
   display: grid;
   grid-template-columns: 12rem 1fr;
 }
+
+.readFlag::before {
+  content: "";
+  display: inline-block;
+  background-color: #3b82f6;
+  height: 20px;
+  width: 3px;
+  position: absolute;
+  left: 0;
+  top: 28px;
+}
+
+.unReadFlag::before {
+  content: "";
+  display: inline-block;
+  background-color: #e54065;
+  height: 20px;
+  width: 3px;
+  position: absolute;
+  left: 0;
+  top: 28px;
+}
