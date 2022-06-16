@@ -1,4 +1,18 @@
+import { useState } from "react";
+
 export const Cards = ({ timeStamp, subject, content, isRead }) => {
+  const [contents] = useState(
+    "It is a long established fact that a reader will be distracted"
+  );
+
+  const trim = () => {
+    let length = 40;
+    let trimmedString = contents.substring(0, length);
+    if (content >= 40) return trimmedString;
+    return trimmedString + " . . .";
+  };
+  const string = trim();
+
   return (
     <div
       className={`${
@@ -18,9 +32,7 @@ export const Cards = ({ timeStamp, subject, content, isRead }) => {
           <p className="text-base text-slate-500 font-medium pb-1">
             Lorem ipsum dolor
           </p>
-          <p className="text-sm text-secondary">
-            It is a long established fact that a reader will be distracted
-          </p>
+          <p className="text-sm text-secondary">{string}</p>
         </div>
       </div>
       <div></div>
