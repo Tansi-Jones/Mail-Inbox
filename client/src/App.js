@@ -18,7 +18,7 @@ function App() {
       <div className="body-grid">
         <section>
           <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white">
-            <button className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-40 mx-auto hover:bg-opacity-90 transition duration-200 ease-in">
+            <button className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-36 mx-auto hover:bg-opacity-90 transition duration-200 ease-in">
               <RiEdit2Line />
               <span>Compose</span>
             </button>
