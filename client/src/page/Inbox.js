@@ -15,7 +15,7 @@ export const Inbox = () => {
             content: message.content,
           }}
         >
-          <Cards {...message} />
+          <Cards {...messages} />
         </Link>
       ))}
     </div>
