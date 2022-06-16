@@ -3,9 +3,17 @@ import messageModel from "../models/messageModel.js";
 export const getMessages = async (req, res) => {
   try {
     const message = await messageModel.find();
-    res.status(200).json({ status: "success", message });
+    res
+      .status(200)
+      .json({ status: "success", message, response: "Fetched all new mail" });
   } catch (error) {
-    res.status(404).json({ status: "failed", error });
+    res
+      .status(404)
+      .json({
+        status: "failed",
+        error,
+        response: "Failed fetched all new mail",
+      });
   }
 };
 

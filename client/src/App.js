@@ -46,9 +46,9 @@ function App() {
   return (
     <>
       <Toaster />
-      <div className="body-grid">
+      <div className="body-grid relative">
         <section>
-          <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white">
+          <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white fixed">
             <button
               className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-36 mx-auto hover:bg-opacity-90 transition duration-200 ease-in cursor-pointer"
               onClick={openModal}
