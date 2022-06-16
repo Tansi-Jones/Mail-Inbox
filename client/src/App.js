@@ -64,9 +64,12 @@ function App() {
 
             <div className="flex items-center space-x-5">
               <div className="relative bg-white rounded-lg p-2 shadow">
-                <div className="bg-primary absolute top-0 w-2 h-2 right-0 rounded-full text-[0.70rem] "></div>
+                {noUnReadMessages > 0 && (
+                  <div className="bg-primary absolute top-0 w-2 h-2 right-0 rounded-full text-[0.70rem] "></div>
+                )}
                 <HiOutlineBell className="text-xl text-secondary" />
               </div>
+
               <div>
                 <div className="flex  items-center space-x-4">
                   <div className="w-8 h-8 rounded-full ring ring-primary">
