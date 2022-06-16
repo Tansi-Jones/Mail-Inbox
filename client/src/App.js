@@ -15,7 +15,7 @@ function App() {
   const [noMessages] = useState(10);
   const [noUnReadMessages] = useState(7);
   let [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [setMessage] = useState("");
 
   const closeModal = () => {
     setIsOpen(false);
