@@ -7,14 +7,18 @@ import { Mail } from "./page/Mail";
 import { HiOutlineInbox, HiOutlineSearch, HiOutlineBell } from "react-icons/hi";
 import { CgShapeCircle } from "react-icons/cg";
 import { RiEdit2Line } from "react-icons/ri";
+import { useState } from "react";
 
 function App() {
+  const [userName] = useState("Tansi Jones");
+  const [noMessages] = useState(10);
+  const [noUnReadMessages] = useState(7);
   return (
     <>
       <div className="body-grid">
         <section>
           <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white">
-            <button className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-40 mx-auto">
+            <button className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-40 mx-auto hover:bg-opacity-90 transition duration-200 ease-in">
               <RiEdit2Line />
               <span>Compose</span>
             </button>
@@ -47,7 +51,7 @@ function App() {
             </div>
           </aside>
         </section>
-        <section>
+        <section className="relative">
           <nav className="flex items-center justify-between px-5 bg-white text-secondary text-sm h-16 w-full">
             <div className="bg-slate-100 py-1 px-3 flex items-center rounded-lg w-72">
               <input
@@ -73,7 +77,7 @@ function App() {
                     />
                   </div>
                   <p className="text-base text-slate-600 font-medium">
-                    Tansi Jones
+                    {userName}
                   </p>
                 </div>
               </div>
@@ -83,7 +87,17 @@ function App() {
           <div>
             <Router>
               <Routes>
-                <Route path="/" element={<Index />} exact />
+                <Route
+                  path="/"
+                  element={
+                    <Index
+                      userName={userName}
+                      noMessages={noMessages}
+                      noUnReadMessages={noUnReadMessages}
+                    />
+                  }
+                  exact
+                />
                 <Route path="/inbox" element={<Inbox />} exact />
                 <Route path="/mail/:id" element={<Mail />} exact />
               </Routes>
