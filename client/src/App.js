@@ -7,18 +7,35 @@ import { Mail } from "./page/Mail";
 import { HiOutlineInbox, HiOutlineSearch, HiOutlineBell } from "react-icons/hi";
 import { CgShapeCircle } from "react-icons/cg";
 import { RiEdit2Line } from "react-icons/ri";
-import { useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
 function App() {
   const [userName] = useState("Tansi Jones");
   const [noMessages] = useState(10);
   const [noUnReadMessages] = useState(7);
+  let [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const openModal = () => {
+    return setIsOpen(true);
+  };
+
+  const handleSubmit = () => {};
+
   return (
     <>
       <div className="body-grid">
         <section>
           <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white">
-            <button className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-36 mx-auto hover:bg-opacity-90 transition duration-200 ease-in">
+            <button
+              className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-36 mx-auto hover:bg-opacity-90 transition duration-200 ease-in cursor-pointer"
+              onClick={openModal}
+            >
               <RiEdit2Line />
               <span>Compose</span>
             </button>
@@ -86,6 +103,64 @@ function App() {
               </div>
             </div>
           </nav>
+
+          {/* Compose button */}
+          <div>
+            <Transition appear show={isOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="fixed inset-0" />
+                </Transition.Child>
+
+                <div className="fixed inset-0 overflow-y-auto">
+                  <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0 scale-95"
+                      enterTo="opacity-100 scale-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100 scale-100"
+                      leaveTo="opacity-0 scale-95"
+                    >
+                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-5 text-left align-middle shadow transition-all">
+                        <form onSubmit={handleSubmit}>
+                          <div>
+                            <textarea
+                              rows="3"
+                              cols="40"
+                              placeholder="New Message"
+                              className="resize-none w-full p-2 rounded-md outline-none text-slate-500 border"
+                              onChange={(event) =>
+                                setMessage(event.target.value)
+                              }
+                            ></textarea>
+                          </div>
+                          <div className="mt-4">
+                            <button
+                              type="button"
+                              className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90"
+                              onClick={closeModal}
+                            >
+                              Send message
+                            </button>
+                          </div>
+                        </form>
+                      </Dialog.Panel>
+                    </Transition.Child>
+                  </div>
+                </div>
+              </Dialog>
+            </Transition>
+          </div>
 
           <div>
             <Router>
