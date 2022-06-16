@@ -1,8 +1,4 @@
-import { useNavigate } from "react-router-dom";
-
 export const Cards = ({ timeStamp, subject, content, isRead }) => {
-  const navigate = useNavigate();
-
   const trim = () => {
     let length = 40;
     let trimmedString = content.substring(0, length);
