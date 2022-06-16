@@ -64,7 +64,7 @@ function App() {
 
             <div className="flex items-center space-x-5">
               <div className="relative bg-white rounded-lg p-2 shadow">
-                <div className="bg-primary absolute top-0 w-3 h-3 right-0 rounded-full text-[0.70rem] "></div>
+                <div className="bg-primary absolute top-0 w-2 h-2 right-0 rounded-full text-[0.70rem] "></div>
                 <HiOutlineBell className="text-xl text-secondary" />
               </div>
               <div>
