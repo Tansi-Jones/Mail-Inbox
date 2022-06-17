@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 export const mailApi = createApi({
   reducerPath: "mailApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5500/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://pf6zzmwt72.execute-api.us-east-1.amazonaws.com/api",
+  }),
   endpoints: (builder) => ({
     getMails: builder.query({
       query: () => ({ url: "/message", method: "GET" }),
