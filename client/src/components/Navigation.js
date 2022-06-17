@@ -15,9 +15,9 @@ export const Navigation = ({ userName, noUnReadMessages }) => {
       <div>
         <div className="flex items-center space-x-4">
           <div className="bg-white shadow p-2 rounded-md mr-4 relative">
-            <div className="absolute -top-2 -right-4 w-1 h-1 p-3 bg-primary rounded-full text-white text-xs font-medium flex items-center justify-center">
-              {noUnReadMessages}
-            </div>
+            {noUnReadMessages >= 1 && (
+              <div className="absolute -top-2 -right-4 w-1 h-1 p-3 bg-primary rounded-full text-white text-xs font-medium flex items-center justify-center"></div>
+            )}
             <HiOutlineBell className="text-secondary text-lg " />
           </div>
           <div className="w-8 h-8 rounded-full ring ring-primary">
