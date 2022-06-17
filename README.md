@@ -11,6 +11,14 @@ This is a simple mail inbox application developed with;
 
 ---
 
+# Client Host
+
+Check out the front end of for this project on
+
+[Vercel](https://mail-inbox.vercel.app/)
+
+---
+
 # API Document
 
 The API Documentation is hosted on Postman, use the link below to test it out
