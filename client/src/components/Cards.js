@@ -1,7 +1,7 @@
 export const Cards = ({ timeStamp, subject, content, isRead }) => {
   const trimWords = function (content) {
     let words;
-    if (content.length > 15) return (words = content.slice(0, 10) + ". . .");
+    if (content.length > 15) return (words = content.slice(0, 100) + ". . .");
     return content;
   };
 
