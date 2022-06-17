@@ -5,7 +5,8 @@ export const Cards = ({ timeStamp, subject, content, isRead }) => {
     if (content >= 40) return trimmedString;
     return trimmedString + " . . .";
   };
-  const string = trim();
+  // const string = ;
+  const date = new Date(timeStamp);
 
   return (
     <div
@@ -24,10 +25,12 @@ export const Cards = ({ timeStamp, subject, content, isRead }) => {
         <div className="">
           <h4 className="text-lg text-slate-600 font-medium">Tansi Jones</h4>
           <p className="text-base text-slate-500 font-medium pb-1">{subject}</p>
-          <p className="text-sm text-secondary">{string}</p>
+          <p className="text-sm text-secondary">{trim()}</p>
         </div>
       </div>
-      <p className="text-sm text-secondary ">{timeStamp}</p>
+      <p className="text-sm text-secondary ">
+        {date.toLocaleDateString("en-GB")}
+      </p>
     </div>
   );
 };

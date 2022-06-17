@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Cards } from "../components/Cards";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 export const Inbox = () => {
   const [messages, setMessage] = useState([]);
@@ -24,7 +24,7 @@ export const Inbox = () => {
         : messages.map((message, index) => (
             <Link
               key={index}
-              to={`/mail/${message._id}`}
+              to={`/message/${message._id}`}
               state={{
                 timeStamp: message.timeStamp,
                 subject: message.subject,

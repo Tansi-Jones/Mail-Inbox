@@ -3,11 +3,13 @@ import { IoReturnUpBack } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-export const Mail = () => {
+export const Message = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { timeStamp, subject, content, id, isRead } = location.state;
+
+  const date = new Date(timeStamp);
 
   useEffect(() => {
     onOpenMail(id);
@@ -48,7 +50,9 @@ export const Mail = () => {
           </div>
         </div>
 
-        <p className="text-sm text-secondary ">{timeStamp}</p>
+        <p className="text-sm text-secondary ">
+          {date.toLocaleDateString("en-GB")}
+        </p>
       </div>
 
       <div className="pl-16 text-slate-500">{content}</div>
