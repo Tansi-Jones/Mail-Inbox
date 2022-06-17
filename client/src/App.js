@@ -7,37 +7,33 @@ import { Message } from "./page/Message";
 import { Navigation } from "./components/Navigation";
 import { Sidebar } from "./components/Sidebar";
 import { Toaster } from "react-hot-toast";
-import axios from "axios";
+import { useGetMailsQuery } from "./services/mailApi";
+import { selectMails, setMails } from "./features/mailSlice";
+import { setNotifications } from "./features/notificationSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
   const [userName] = useState("Tansi Jones");
-  const [messages, setMessage] = useState([]);
-  let noUnReadMessages = 0;
+  const allMails = useSelector(selectMails);
+
+  const { data, isLoading } = useGetMailsQuery();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchMessages();
-  }, []);
-
-  const fetchMessages = async () => {
-    try {
-      const { data } = await axios.get("http://localhost:5500/api/message");
-      setMessage(data.message);
-    } catch (error) {}
-  };
-
-  const filterUnreadMessages = () => {
-    let unReadMessages = [];
-    let total = 0;
-    messages.forEach((element) => {
-      unReadMessages.push(element.isRead);
-    });
-
-    for (let count = 0; count < unReadMessages.length; count++) {
-      if (unReadMessages[count] === false) total++;
+    if (!isLoading) {
+      dispatchMails();
     }
-    return (noUnReadMessages = total);
+  }, [data, isLoading]);
+
+  useEffect(() => {
+    dispatch(setNotifications(allMails));
+  });
+
+  const dispatchMails = () => {
+    for (let i = 0; i < data.message.length; i++) {
+      dispatch(setMails(data.message[i]));
+    }
   };
-  filterUnreadMessages();
 
   return (
     <>
@@ -45,22 +41,12 @@ function App() {
       <div className="body-grid relative">
         <Sidebar />
         <section className="relative">
-          <Navigation userName={userName} noUnReadMessages={noUnReadMessages} />
+          <Navigation userName={userName} />
 
           <div>
             <Router>
               <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Index
-                      userName={userName}
-                      noUnReadMessages={noUnReadMessages}
-                      messages={messages}
-                    />
-                  }
-                  exact
-                />
+                <Route path="/" element={<Index userName={userName} />} exact />
                 <Route path="/inbox" element={<Inbox />} exact />
                 <Route path="/message/:id" element={<Message />} exact />
               </Routes>

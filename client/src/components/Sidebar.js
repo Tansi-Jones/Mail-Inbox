@@ -4,22 +4,23 @@ import { HiOutlineInbox, HiOutlineHome } from "react-icons/hi";
 import { CgShapeCircle } from "react-icons/cg";
 import { RiEdit2Line } from "react-icons/ri";
 import toast from "react-hot-toast";
-import axios from "axios";
+import { useSendMailMutation } from "../services/mailApi";
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState("");
   const [subject, setSubject] = useState("");
 
+  const [send] = useSendMailMutation();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await axios.post("http://localhost:5500/api/message", {
-        content,
-        subject,
-      });
+      const data = await send({ content, subject }).unwrap();
       toast(data.response);
+      window.location.reload();
+      console.log(data);
     } catch (error) {
       toast(error.response);
     }
@@ -95,7 +96,7 @@ export const Sidebar = () => {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex min-h-full items-center justify-center p-4 text-center bg-black bg-opacity-20">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
