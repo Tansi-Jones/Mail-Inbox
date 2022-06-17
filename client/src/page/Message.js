@@ -8,7 +8,11 @@ export const Message = () => {
 
   const { timeStamp, subject, content, id, isRead } = location.state;
 
-  const date = new Date(timeStamp);
+  const time = new Date(timeStamp).toLocaleTimeString("en", {
+    timeStyle: "short",
+    hour12: true,
+    timeZone: "UTC",
+  });
 
   useEffect(() => {
     onOpenMail(id);
@@ -49,9 +53,7 @@ export const Message = () => {
           </div>
         </div>
 
-        <p className="text-sm text-secondary ">
-          {date.toLocaleDateString("en-GB")}
-        </p>
+        <p className="text-sm text-secondary ">{time}</p>
       </div>
 
       <div className="pl-16 text-slate-500">{content}</div>
