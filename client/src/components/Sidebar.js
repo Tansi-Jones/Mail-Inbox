@@ -36,7 +36,7 @@ export const Sidebar = () => {
 
   return (
     <section>
-      <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white fixed">
+      <aside className="flex flex-col w-48 h-screen px-4 py-8 bg-white fixed z-30">
         <button
           className="bg-primary text-white px-4 py-2 rounded-md flex items-center justify-center space-x-4 w-36 mx-auto hover:bg-opacity-90 transition duration-200 ease-in cursor-pointer"
           onClick={openModal}
@@ -82,7 +82,7 @@ export const Sidebar = () => {
       </aside>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

@@ -1,12 +1,15 @@
 export const Cards = ({ timeStamp, subject, content, isRead }) => {
-  const trim = () => {
-    let length = 40;
-    let trimmedString = content.substring(0, length);
-    if (content >= 40) return trimmedString;
-    return trimmedString + " . . .";
+  const trimWords = function (content) {
+    let words;
+    if (content.length > 15) return (words = content.slice(0, 10) + ". . .");
+    return content;
   };
-  // const string = ;
-  const date = new Date(timeStamp);
+
+  const time = new Date(timeStamp).toLocaleTimeString("en", {
+    timeStyle: "short",
+    hour12: true,
+    timeZone: "UTC",
+  });
 
   return (
     <div
@@ -25,12 +28,10 @@ export const Cards = ({ timeStamp, subject, content, isRead }) => {
         <div className="">
           <h4 className="text-lg text-slate-600 font-medium">Tansi Jones</h4>
           <p className="text-base text-slate-500 font-medium pb-1">{subject}</p>
-          <p className="text-sm text-secondary">{trim()}</p>
+          <p className="text-sm text-secondary">{trimWords(content)}</p>
         </div>
       </div>
-      <p className="text-sm text-secondary ">
-        {date.toLocaleDateString("en-GB")}
-      </p>
+      <p className="text-sm text-secondary ">{time}</p>
     </div>
   );
 };

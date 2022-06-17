@@ -6,8 +6,8 @@ export const Navigation = ({ userName }) => {
   const noUnReadMessages = useSelector(selectCurrentValue);
 
   return (
-    <nav className="flex items-center justify-between px-10 bg-white text-secondary text-sm h-16 w-full">
-      <div className="bg-slate-100 py-1 px-3 flex items-center rounded-lg w-72">
+    <nav className="flex items-center justify-end md:justify-between px-10 bg-white text-secondary text-sm h-16 w-full">
+      <div className="bg-slate-100 py-1 px-3 hidden md:flex items-center rounded-lg w-72">
         <input
           type="search"
           placeholder="Search"
